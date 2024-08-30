@@ -1,0 +1,28 @@
+{
+  "name": "Subtitle Nexus",
+  "identifier": "com.subtitle.nexus",
+  "version": "1.0.0",
+  "description": "Description here",
+  "author": {
+    "name": "Subtitle Nexus",
+    "email": "support@subtitlenexus.com",
+    "url": "https://subtitlenexus.com/"
+  },
+  "entry": "src/index.js",
+  "permissions": [
+    "show-osd",
+    "file-system",
+    "network-request"
+  ],
+  "preferencesPage":"pref.html",
+  "allowedDomains": ["https://subtitlenexus.com/"],
+  "preferenceDefaults": {},
+  "subtitleProviders": [
+    {
+      "id": "subtitlenexus-iina-plugin",
+      "name": "Subtitle Nexus"
+    }
+  ],
+  "ghVersion": 1,
+  "ghRepo": "subtitlenexus/subtitlenexus-iina-plugin-dev"
+}

@@ -1,0 +1,119 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Key Input</title>
+  <style>
+
+    body {
+      min-height: 100vh;
+      background-color: #000000;
+    }
+
+    .container {
+      background-color: #000000;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      height: 100%;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: calc(50% - 7px);
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    button:last-of-type {
+      margin-right: 0;
+    }
+
+    button:nth-of-type(2) {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    button:nth-of-type(2):hover {
+      background-color: #45a049;
+    }
+
+    button:nth-of-type(1) {
+      background-color: #008CBA;
+      color: white;
+    }
+
+    button:nth-of-type(1):hover {
+      background-color: #007bb5;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: calc(100%);
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .message {
+      margin-top: 20px;
+      text-align: center;
+      color: green;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 id="ch">Enter API Key</h2>
+  <input type="text" data-pref-key="local-api-key" id="apiKey" placeholder="Enter your API key">
+  <button onclick="changeApiKey()">Change Key</button>
+  <button onclick="saveApiKey()">Save API Key</button>
+  <div id="message" class="message"></div>
+</div>
+
+<script>
+  const {preferences} = window.iina;
+
+  function saveApiKey() {
+    const apiKey = document.getElementById('apiKey').value;
+    if (apiKey) {
+      preferences.set('local-api-key', apiKey);
+      localStorage.setItem('local-api-key', apiKey);
+      document.getElementById('apiKey').readOnly = true;
+      document.getElementById('apiKey').value = '*'.repeat(apiKey.length);
+      document.getElementById('message').textContent = 'API Key saved successfully!';
+    }
+  }
+
+  function changeApiKey() {
+    document.getElementById('apiKey').readOnly = false;
+    document.getElementById('apiKey').value = setKeyOnDisplay();
+  }
+
+  window.onload = function () {
+    document.getElementById('apiKey').value = '*'.repeat(setKeyOnDisplay().length);
+    document.getElementById('apiKey').readOnly = true;
+  }
+
+  function setKeyOnDisplay() {
+    const savedApiKey = localStorage.getItem('local-api-key');
+    return savedApiKey ? savedApiKey : "";
+  }
+
+
+</script>
+
+</body>
